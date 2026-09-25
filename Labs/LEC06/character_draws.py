@@ -17,6 +17,15 @@ def move_left():
     for y in range(50,551,5):
          draw_boy(50,y)
 
+def move_AB():
+    pass
+
+def move_BC():
+       pass
+
+def move_CA():
+       pass
+
 def draw_boy(x,y):
     clear_canvas()
     boy.draw(x,y)
