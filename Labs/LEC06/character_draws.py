@@ -6,7 +6,8 @@ def move_top():
         draw_boy(x,550)
 
 def move_right():
-    print('right')   
+    for y in range(550,49,-5):
+        draw_boy(750,y)
 
 def move_bottom():
     print('bottom')
@@ -23,7 +24,7 @@ def draw_boy(x,y):
 open_canvas(800,600)
 boy=load_image('character.png')
 
-move_top()
+
 def move_circle():
     for degree in range(360):
         theta=math.radians(degree)
