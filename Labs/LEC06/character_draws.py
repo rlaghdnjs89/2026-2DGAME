@@ -10,7 +10,8 @@ delay(1)
 close_canvas()
 
 def move_circle():
-     pass
+    theta=math.radians(degree)
+    x=400+200*math.cos(theta)
 
 def move_rectangle():
       pass
