@@ -49,7 +49,9 @@ def move_rectangle():
     move_left()
 
 def move_triangle():
-      pass
+       move_AB()
+       move_BC()
+       move_CA()
  
 while True:
      move_circle()
