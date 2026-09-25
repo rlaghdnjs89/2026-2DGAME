@@ -12,7 +12,13 @@ def move_bottom():
 
 def move_left():
     print('left')
-          
+
+def draw_boy(x,y):
+    clear_canvas()
+    boy.draw(x,y)
+    update_canvas()
+    delay(0.01)
+    
 open_canvas(800,600)
 boy=load_image('character.png')
 
