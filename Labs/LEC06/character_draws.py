@@ -1,6 +1,18 @@
 from pico2d import *
 import math
 
+def move_top():
+    pass
+
+def move_right():
+    pass
+
+def move_bottom():
+    pass
+
+def move_left():
+    pass
+          
 open_canvas(800,600)
 boy=load_image('character.png')
 
