@@ -8,13 +8,14 @@ boy.draw(400,300)
 update_canvas()
 delay(1)
 close_canvas()
+
 def move_circle():
-       print('circle')
+     pass
 
 def move_rectangle():
-       print('rectangle')
+      pass
 def move_triangle():
-       print('triangle')
+   pass
  
 while True:
       move_circle()
