@@ -47,13 +47,6 @@ def draw_boy(x,y):
     update_canvas()
     delay(0.01)
 
-open_canvas(800,600)
-boy=load_image('character.png')
-
-move_AB()
-move_BC()
-move_CA()
-
 def move_circle():
     for degree in range(360):
         theta=math.radians(degree)
@@ -72,6 +65,9 @@ def move_triangle():
        move_BC()
        move_CA()
  
+open_canvas(800,600)
+boy=load_image('character.png')
+
 while True:
      move_circle()
      move_rectangle()
