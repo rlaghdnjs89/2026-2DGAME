@@ -2,16 +2,16 @@ from pico2d import *
 import math
 
 def move_top():
-    pass
+    print('top')
 
 def move_right():
-    pass
+    print('right')   
 
 def move_bottom():
-    pass
+    print('bottom')
 
 def move_left():
-    pass
+    print('left')
           
 open_canvas(800,600)
 boy=load_image('character.png')
@@ -33,7 +33,7 @@ def move_rectangle():
     move_right()
     move_bottom()
     move_left()
-    
+
 def move_triangle():
       pass
  
