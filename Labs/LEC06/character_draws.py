@@ -25,7 +25,7 @@ def draw_boy(x,y):
 open_canvas(800,600)
 boy=load_image('character.png')
 
-
+move_bottom()
 
 for degree in range(360):
         theta=math.radians(degree)
