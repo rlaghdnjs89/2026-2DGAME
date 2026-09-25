@@ -18,7 +18,7 @@ def move_left():
          draw_boy(50,y)
 
 def move_AB():
-    n=50
+    n=120
     for step in range(n+1):
         t=step/n 
         x=100+600*t
@@ -26,7 +26,7 @@ def move_AB():
         draw_boy(x,y)
 
 def move_BC():
-       n=50
+       n=120
        for step in range(n+1):
            t=step/n
            x=700-300*t
@@ -34,7 +34,7 @@ def move_BC():
            draw_boy(x,y)
 
 def move_CA():
-       n=50
+       n=120
        for step in range(n + 1):
         t = step / n
         x = 400 - 300 * t
