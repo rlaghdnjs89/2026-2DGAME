@@ -34,7 +34,11 @@ def move_BC():
            draw_boy(x,y)
 
 def move_CA():
-       pass
+       for step in range(n + 1):
+        t = step / n
+        x = 400 - 300 * t
+        y = 500 - 400 * t
+        draw_boy(x, y)
 
 def draw_boy(x,y):
     clear_canvas()
@@ -44,7 +48,7 @@ def draw_boy(x,y):
 
 open_canvas(800,600)
 boy=load_image('character.png')
-move_BC()
+move_CA()
 def move_circle():
     for degree in range(360):
         theta=math.radians(degree)
