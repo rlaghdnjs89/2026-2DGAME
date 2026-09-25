@@ -11,6 +11,11 @@ def move_circle():
         x=400+200*math.cos(theta)
         y=300+200*math.sin(theta)
 
+        clear_canvas()
+        boy.draw(x,y)
+        update_canvas()
+        
+
 def move_rectangle():
       pass
 def move_triangle():
