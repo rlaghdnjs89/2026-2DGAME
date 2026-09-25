@@ -18,7 +18,12 @@ def move_left():
          draw_boy(50,y)
 
 def move_AB():
-    pass
+    n=120
+    for step in range(n+1):
+        t=step/n 
+        x=100+600*t
+        y=100
+        draw_boy(x,y)
 
 def move_BC():
        pass
@@ -34,7 +39,7 @@ def draw_boy(x,y):
 
 open_canvas(800,600)
 boy=load_image('character.png')
-
+move_AB()
 def move_circle():
     for degree in range(360):
         theta=math.radians(degree)
