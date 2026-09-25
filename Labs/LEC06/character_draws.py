@@ -29,7 +29,11 @@ def move_circle():
         delay(0.01) 
 
 def move_rectangle():
-      pass
+    move_top()
+    move_right()
+    move_bottom()
+    move_left()
+    
 def move_triangle():
       pass
  
