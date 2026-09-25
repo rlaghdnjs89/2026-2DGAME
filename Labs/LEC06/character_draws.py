@@ -34,6 +34,7 @@ def move_BC():
            draw_boy(x,y)
 
 def move_CA():
+       n=100
        for step in range(n + 1):
         t = step / n
         x = 400 - 300 * t
