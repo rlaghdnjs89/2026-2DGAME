@@ -91,16 +91,18 @@ def main():
         if (character.w, character.h) != (6 * CELL_SIZE, 4 * CELL_SIZE):
             raise ValueError('hero_sprite_sheet.png must be a 6 x 4 sheet of 256 px cells')
 
-        for animation in ANIMATIONS:
-            for frame in playback_indices(animation):
-                clear_canvas()
-                grass.draw(400, 30)
-                character.clip_draw(
-                    *source_rect(animation, frame),
-                    *target_rect(animation, frame),
-                )
-                update_canvas()
-                delay(1 / animation.fps)
+        while True:
+            for animation in ANIMATIONS:
+                for frame in playback_indices(animation):
+                    clear_canvas()
+                    grass.draw(400, 30)
+                    character.clip_draw(
+                        *source_rect(animation, frame),
+                        *target_rect(animation, frame),
+                    )
+                    update_canvas()
+                    delay(1 / animation.fps)
+                delay(PAUSE_SECONDS)
     finally:
         close_canvas()
 
