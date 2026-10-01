@@ -82,6 +82,15 @@ def playback_indices(animation: Animation) -> tuple[int, ...]:
     return tuple(range(len(animation.frames))) * LOOPS_PER_ACTION
 
 
+def exit_requested() -> bool:
+    for event in get_events():
+        if event.type == SDL_QUIT:
+            return True
+        if event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
+            return True
+    return False
+
+
 def main():
     open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
     try:
@@ -94,6 +103,8 @@ def main():
         while True:
             for animation in ANIMATIONS:
                 for frame in playback_indices(animation):
+                    if exit_requested():
+                        return
                     clear_canvas()
                     grass.draw(400, 30)
                     character.clip_draw(
