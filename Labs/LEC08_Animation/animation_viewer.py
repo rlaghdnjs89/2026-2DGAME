@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from pathlib import Path
+from time import monotonic
 
 from pico2d import *
 
@@ -7,7 +8,8 @@ CANVAS_WIDTH = 800
 CANVAS_HEIGHT = 600
 CELL_SIZE = 256
 DRAW_SIZE = 560
-FRAME_COUNT = 6
+LOOPS_PER_ACTION = 5
+PAUSE_SECONDS = 1.0
 ASSET_DIR = Path(__file__).resolve().parent
 
 
@@ -76,6 +78,10 @@ def target_rect(animation: Animation, frame_index: int) -> tuple[int, int, int, 
     return round(center_x), round(center_y), round(width * scale), round(height * scale)
 
 
+def playback_indices(animation: Animation) -> tuple[int, ...]:
+    return tuple(range(len(animation.frames))) * LOOPS_PER_ACTION
+
+
 def main():
     open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
     try:
@@ -86,7 +92,7 @@ def main():
             raise ValueError('hero_sprite_sheet.png must be a 6 x 4 sheet of 256 px cells')
 
         for animation in ANIMATIONS:
-            for frame in range(len(animation.frames)):
+            for frame in playback_indices(animation):
                 clear_canvas()
                 grass.draw(400, 30)
                 character.clip_draw(
