@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from pathlib import Path
 
 from pico2d import *
@@ -8,6 +9,14 @@ CELL_SIZE = 256
 DRAW_SIZE = 560
 FRAME_COUNT = 6
 ASSET_DIR = Path(__file__).resolve().parent
+
+
+@dataclass(frozen=True)
+class Animation:
+    name: str
+    row: int  # zero is the top row of the PNG
+    frames: tuple[int, ...]
+    fps: float
 
 def main():
     open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
