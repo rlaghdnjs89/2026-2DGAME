@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from pico2d import *
 
 CANVAS_WIDTH = 800
@@ -5,11 +7,12 @@ CANVAS_HEIGHT = 600
 CELL_SIZE = 256
 DRAW_SIZE = 560
 FRAME_COUNT = 6
+ASSET_DIR = Path(__file__).resolve().parent
 
 def main():
     open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
-    grass = load_image('grass.png')
-    character = load_image('hero_sprite_sheet.png')
+    grass = load_image(str(ASSET_DIR / 'grass.png'))
+    character = load_image(str(ASSET_DIR / 'hero_sprite_sheet.png'))
 
     for frame in range(FRAME_COUNT):
         clear_canvas()
