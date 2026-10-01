@@ -18,6 +18,9 @@ class Animation:
     frames: tuple[int, ...]
     fps: float
 
+
+WALK = Animation('Walk', 0, (0, 1, 2, 3, 4, 5), 8.0)
+
 def main():
     open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
     try:
