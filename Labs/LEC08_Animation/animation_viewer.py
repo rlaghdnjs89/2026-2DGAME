@@ -91,6 +91,17 @@ def exit_requested() -> bool:
     return False
 
 
+def wait_or_exit(seconds: float) -> bool:
+    deadline = monotonic() + seconds
+    while True:
+        if exit_requested():
+            return False
+        remaining = deadline - monotonic()
+        if remaining <= 0:
+            return True
+        delay(min(1 / 60, remaining))
+
+
 def main():
     open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
     try:
@@ -112,8 +123,10 @@ def main():
                         *target_rect(animation, frame),
                     )
                     update_canvas()
-                    delay(1 / animation.fps)
-                delay(PAUSE_SECONDS)
+                    if not wait_or_exit(1 / animation.fps):
+                        return
+                if not wait_or_exit(PAUSE_SECONDS):
+                    return
     finally:
         close_canvas()
 
