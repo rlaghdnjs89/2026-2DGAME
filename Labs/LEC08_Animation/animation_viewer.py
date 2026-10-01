@@ -2,10 +2,16 @@ from dataclasses import dataclass
 from pathlib import Path
 from time import monotonic
 
-from pico2d import *
+from pico2d import (
+    SDL_KEYDOWN, SDL_QUIT, SDLK_ESCAPE,
+    clear_canvas, close_canvas, delay, get_events,
+    load_image, open_canvas, update_canvas,
+)
 
 CANVAS_WIDTH = 800
 CANVAS_HEIGHT = 600
+SHEET_COLUMNS = 6
+SHEET_ROWS = 4
 CELL_SIZE = 256
 DRAW_SIZE = 560
 LOOPS_PER_ACTION = 5
@@ -61,7 +67,7 @@ def source_rect(animation: Animation, frame_index: int) -> tuple[int, int, int, 
     bottom = min(CELL_SIZE - 1, bottom + 2)
     return (
         column * CELL_SIZE + left,
-        (3 - animation.row) * CELL_SIZE + CELL_SIZE - 1 - bottom,
+        (SHEET_ROWS - 1 - animation.row) * CELL_SIZE + CELL_SIZE - 1 - bottom,
         right - left + 1,
         bottom - top + 1,
     )
@@ -72,7 +78,7 @@ def target_rect(animation: Animation, frame_index: int) -> tuple[int, int, int, 
     left, bottom, width, height = source_rect(animation, frame_index)
     scale = DRAW_SIZE / CELL_SIZE
     cell_left = column * CELL_SIZE
-    cell_bottom = (3 - animation.row) * CELL_SIZE
+    cell_bottom = (SHEET_ROWS - 1 - animation.row) * CELL_SIZE
     center_x = CANVAS_WIDTH / 2 + (left - cell_left + width / 2 - CELL_SIZE / 2) * scale
     center_y = CANVAS_HEIGHT / 2 + (bottom - cell_bottom + height / 2 - CELL_SIZE / 2) * scale
     return round(center_x), round(center_y), round(width * scale), round(height * scale)
@@ -108,7 +114,7 @@ def main():
         grass = load_image(str(ASSET_DIR / 'grass.png'))
         character = load_image(str(ASSET_DIR / 'hero_sprite_sheet.png'))
 
-        if (character.w, character.h) != (6 * CELL_SIZE, 4 * CELL_SIZE):
+        if (character.w, character.h) != (SHEET_COLUMNS * CELL_SIZE, SHEET_ROWS * CELL_SIZE):
             raise ValueError('hero_sprite_sheet.png must be a 6 x 4 sheet of 256 px cells')
 
         while True:
@@ -117,7 +123,7 @@ def main():
                     if exit_requested():
                         return
                     clear_canvas()
-                    grass.draw(400, 30)
+                    grass.draw(CANVAS_WIDTH // 2, 30)
                     character.clip_draw(
                         *source_rect(animation, frame),
                         *target_rect(animation, frame),
