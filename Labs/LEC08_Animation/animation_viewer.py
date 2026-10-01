@@ -15,6 +15,9 @@ def main():
         grass = load_image(str(ASSET_DIR / 'grass.png'))
         character = load_image(str(ASSET_DIR / 'hero_sprite_sheet.png'))
 
+        if (character.w, character.h) != (6 * CELL_SIZE, 4 * CELL_SIZE):
+            raise ValueError('hero_sprite_sheet.png must be a 6 x 4 sheet of 256 px cells')
+
         for frame in range(FRAME_COUNT):
             clear_canvas()
             grass.draw(400, 30)
