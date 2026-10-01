@@ -52,7 +52,17 @@ FRAME_BOUNDS = {
 
 def source_rect(animation: Animation, frame_index: int) -> tuple[int, int, int, int]:
     column = animation.frames[frame_index]
-    return column * CELL_SIZE, (3 - animation.row) * CELL_SIZE, CELL_SIZE, CELL_SIZE
+    left, top, right, bottom = FRAME_BOUNDS[animation.row][column]
+    left = max(0, left - 2)
+    top = max(0, top - 2)
+    right = min(CELL_SIZE - 1, right + 2)
+    bottom = min(CELL_SIZE - 1, bottom + 2)
+    return (
+        column * CELL_SIZE + left,
+        (3 - animation.row) * CELL_SIZE + CELL_SIZE - 1 - bottom,
+        right - left + 1,
+        bottom - top + 1,
+    )
 
 
 def main():
