@@ -33,8 +33,8 @@ JUMP = Animation('Jump', 2, (0, 1, 2, 3, 4, 5), 8.0)
 ATTACK = Animation('Attack', 3, (0, 1, 2, 3, 4), 10.0)
 ANIMATIONS = (WALK, RUN, JUMP, ATTACK)
 
-# Per-cell opaque bounds: left, top, right, bottom in image coordinates.
-# Computed from alpha > 8; source_rect adds a two-pixel safety margin.
+# Opaque bounds relative to each cell; some sword tips extend into the next cell.
+# Computed from alpha > 8; source_rect adds a one-pixel safety margin.
 FRAME_BOUNDS = {
     0: (
         (35, 48, 228, 238), (31, 47, 227, 238),
@@ -43,8 +43,8 @@ FRAME_BOUNDS = {
     ),
     1: (
         (35, 41, 253, 227), (39, 40, 255, 227),
-        (30, 42, 251, 228), (32, 38, 255, 255),
-        (0, 41, 255, 228), (0, 42, 237, 228),
+        (30, 42, 251, 228), (32, 38, 257, 255),
+        (40, 41, 256, 228), (39, 42, 237, 228),
     ),
     2: (
         (41, 81, 239, 247), (39, 40, 245, 255),
@@ -53,18 +53,18 @@ FRAME_BOUNDS = {
     ),
     3: (
         (33, 35, 234, 221), (27, 0, 201, 221),
-        (4, 34, 250, 221), (43, 36, 255, 221),
-        (0, 35, 255, 221), (0, 35, 224, 221),
+        (4, 34, 250, 221), (43, 36, 281, 221),
+        (38, 35, 289, 221), (35, 35, 224, 221),
     ),
 }
 
 def source_rect(animation: Animation, frame_index: int) -> tuple[int, int, int, int]:
     column = animation.frames[frame_index]
     left, top, right, bottom = FRAME_BOUNDS[animation.row][column]
-    left = max(0, left - 2)
-    top = max(0, top - 2)
-    right = min(CELL_SIZE - 1, right + 2)
-    bottom = min(CELL_SIZE - 1, bottom + 2)
+    left = max(0, left - 1)
+    top = max(0, top - 1)
+    right = min(SHEET_COLUMNS * CELL_SIZE - 1 - column * CELL_SIZE, right + 1)
+    bottom = min(CELL_SIZE - 1, bottom + 1)
     return (
         column * CELL_SIZE + left,
         (SHEET_ROWS - 1 - animation.row) * CELL_SIZE + CELL_SIZE - 1 - bottom,

@@ -24,6 +24,15 @@ class AnimationViewerTests(unittest.TestCase):
                 self.assertLessEqual(center_y + draw_height / 2, viewer.CANVAS_HEIGHT)
         self.assertGreater(len(sizes), 1)
 
+    def test_overlapping_cells_keep_sword_tips_without_neighbor_artifacts(self):
+        for animation, frame in ((viewer.RUN, 4), (viewer.RUN, 5), (viewer.ATTACK, 4)):
+            x, _, _, _ = viewer.source_rect(animation, frame)
+            self.assertGreaterEqual(x - animation.frames[frame] * viewer.CELL_SIZE, 34)
+        for animation, frame in ((viewer.RUN, 3), (viewer.RUN, 4), (viewer.ATTACK, 3), (viewer.ATTACK, 4)):
+            x, _, width, _ = viewer.source_rect(animation, frame)
+            cell_right = (animation.frames[frame] + 1) * viewer.CELL_SIZE
+            self.assertGreater(x + width, cell_right)
+
     def test_each_action_uses_its_own_frame_count_for_five_loops(self):
         self.assertEqual(len(viewer.ANIMATIONS), 4)
         for animation in viewer.ANIMATIONS:
