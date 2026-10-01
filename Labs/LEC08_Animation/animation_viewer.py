@@ -11,17 +11,18 @@ ASSET_DIR = Path(__file__).resolve().parent
 
 def main():
     open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
-    grass = load_image(str(ASSET_DIR / 'grass.png'))
-    character = load_image(str(ASSET_DIR / 'hero_sprite_sheet.png'))
+    try:
+        grass = load_image(str(ASSET_DIR / 'grass.png'))
+        character = load_image(str(ASSET_DIR / 'hero_sprite_sheet.png'))
 
-    for frame in range(FRAME_COUNT):
-        clear_canvas()
-        grass.draw(400, 30)
-        character.clip_draw(frame * CELL_SIZE, 3 * CELL_SIZE, CELL_SIZE, CELL_SIZE, CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2, DRAW_SIZE, DRAW_SIZE)
-        update_canvas()
-        delay(0.12)
-
-    close_canvas()
+        for frame in range(FRAME_COUNT):
+            clear_canvas()
+            grass.draw(400, 30)
+            character.clip_draw(frame * CELL_SIZE, 3 * CELL_SIZE, CELL_SIZE, CELL_SIZE, CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2, DRAW_SIZE, DRAW_SIZE)
+            update_canvas()
+            delay(0.12)
+    finally:
+        close_canvas()
 
 
 if __name__ == '__main__':
