@@ -25,6 +25,16 @@ JUMP = Animation('Jump', 2, (0, 1, 2, 3, 4, 5), 8.0)
 ATTACK = Animation('Attack', 3, (0, 1, 2, 3, 4), 10.0)
 ANIMATIONS = (WALK, RUN, JUMP, ATTACK)
 
+# Per-cell opaque bounds: left, top, right, bottom in image coordinates.
+# Computed from alpha > 8; source_rect adds a two-pixel safety margin.
+FRAME_BOUNDS = {
+    0: (
+        (35, 48, 228, 238), (31, 47, 227, 238),
+        (30, 47, 228, 238), (28, 48, 227, 238),
+        (33, 48, 226, 238), (33, 48, 224, 238),
+    ),
+}
+
 def source_rect(animation: Animation, frame_index: int) -> tuple[int, int, int, int]:
     column = animation.frames[frame_index]
     return column * CELL_SIZE, (3 - animation.row) * CELL_SIZE, CELL_SIZE, CELL_SIZE
