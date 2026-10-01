@@ -25,6 +25,11 @@ JUMP = Animation('Jump', 2, (0, 1, 2, 3, 4, 5), 8.0)
 ATTACK = Animation('Attack', 3, (0, 1, 2, 3, 4), 10.0)
 ANIMATIONS = (WALK, RUN, JUMP, ATTACK)
 
+def source_rect(animation: Animation, frame_index: int) -> tuple[int, int, int, int]:
+    column = animation.frames[frame_index]
+    return column * CELL_SIZE, (3 - animation.row) * CELL_SIZE, CELL_SIZE, CELL_SIZE
+
+
 def main():
     open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
     try:
