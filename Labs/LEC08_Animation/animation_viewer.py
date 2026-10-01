@@ -22,6 +22,7 @@ class Animation:
 WALK = Animation('Walk', 0, (0, 1, 2, 3, 4, 5), 8.0)
 RUN = Animation('Run', 1, (0, 1, 2, 3, 4, 5), 11.0)
 JUMP = Animation('Jump', 2, (0, 1, 2, 3, 4, 5), 8.0)
+ATTACK = Animation('Attack', 3, (0, 1, 2, 3, 4), 10.0)
 
 def main():
     open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
