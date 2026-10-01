@@ -65,6 +65,17 @@ def source_rect(animation: Animation, frame_index: int) -> tuple[int, int, int, 
     )
 
 
+def target_rect(animation: Animation, frame_index: int) -> tuple[int, int, int, int]:
+    column = animation.frames[frame_index]
+    left, bottom, width, height = source_rect(animation, frame_index)
+    scale = DRAW_SIZE / CELL_SIZE
+    cell_left = column * CELL_SIZE
+    cell_bottom = (3 - animation.row) * CELL_SIZE
+    center_x = CANVAS_WIDTH / 2 + (left - cell_left + width / 2 - CELL_SIZE / 2) * scale
+    center_y = CANVAS_HEIGHT / 2 + (bottom - cell_bottom + height / 2 - CELL_SIZE / 2) * scale
+    return round(center_x), round(center_y), round(width * scale), round(height * scale)
+
+
 def main():
     open_canvas(CANVAS_WIDTH, CANVAS_HEIGHT)
     try:
@@ -80,7 +91,7 @@ def main():
                 grass.draw(400, 30)
                 character.clip_draw(
                     *source_rect(animation, frame),
-                    CANVAS_WIDTH // 2, CANVAS_HEIGHT // 2, DRAW_SIZE, DRAW_SIZE,
+                    *target_rect(animation, frame),
                 )
                 update_canvas()
                 delay(1 / animation.fps)
