@@ -15,6 +15,13 @@ class AnimationViewerTests(unittest.TestCase):
                 self.assertLessEqual(x + width, 6 * viewer.CELL_SIZE)
                 self.assertLessEqual(y + height, 4 * viewer.CELL_SIZE)
                 sizes.add((width, height))
+                center_x, center_y, draw_width, draw_height = viewer.target_rect(animation, frame)
+                self.assertGreaterEqual(draw_width, viewer.CANVAS_WIDTH // 2)
+                self.assertGreaterEqual(draw_height, viewer.CANVAS_HEIGHT // 2)
+                self.assertGreaterEqual(center_x - draw_width / 2, 0)
+                self.assertLessEqual(center_x + draw_width / 2, viewer.CANVAS_WIDTH)
+                self.assertGreaterEqual(center_y - draw_height / 2, 0)
+                self.assertLessEqual(center_y + draw_height / 2, viewer.CANVAS_HEIGHT)
         self.assertGreater(len(sizes), 1)
 
     def test_each_action_uses_its_own_frame_count_for_five_loops(self):
